@@ -1,7 +1,7 @@
-SIAlertView
+SPMAlertView
 =============
 
-An UIAlertView replacement with block syntax and fancy transition styles. As seen in [Grid Diary](http://griddiaryapp.com/).
+An SIAlertView graphic replacement with block syntax and fancy transition styles. As seen in [Grid Diary](http://griddiaryapp.com/).
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Sumi-Interactive&url=https://github.com/Sumi-Interactive/SIAlertView&title=SIAlertView&tags=github&category=software)
 
@@ -22,7 +22,7 @@ An UIAlertView replacement with block syntax and fancy transition styles. As see
 
 ### Cocoapods(Recommended)
 
-1. Add `pod 'SIAlertView'` to your Podfile.
+1. Add `pod 'SPMAlertView'` to your Podfile.
 2. Run `pod install`
 
 ### Manual
