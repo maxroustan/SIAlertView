@@ -7,6 +7,7 @@
 //
 
 #import "SIAlertView.h"
+#import "UIWindow+SIUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 NSString *const SIAlertViewWillShowNotification = @"SIAlertViewWillShowNotification";
@@ -23,8 +24,8 @@ NSString *const SIAlertViewDidDismissNotification = @"SIAlertViewDidDismissNotif
 #define CONTENT_PADDING_LEFT 10
 #define CONTENT_PADDING_TOP 12
 #define CONTENT_PADDING_BOTTOM 10
-#define BUTTON_HEIGHT 40
-#define CONTAINER_WIDTH 600
+#define BUTTON_HEIGHT 44
+#define CONTAINER_WIDTH 300
 
 const UIWindowLevel UIWindowLevelSIAlert = 1999.0;  // don't overlap system's alert
 const UIWindowLevel UIWindowLevelSIAlertBackground = 1998.0; // below the alert window
@@ -36,65 +37,10 @@ static BOOL __si_alert_animating;
 static SIAlertBackgroundWindow *__si_alert_background_window;
 static SIAlertView *__si_alert_current_view;
 
-@interface UIWindow (SIAlert_Utils)
-
-- (UIViewController *)currentViewController;
-
-@end
-
-@implementation UIWindow (SIAlert_Utils)
-
-- (UIViewController *)currentViewController
-{
-    UIViewController *viewController = self.rootViewController;
-    while (viewController.presentedViewController) {
-        viewController = viewController.presentedViewController;
-    }
-    return viewController;
-}
-
-@end
-
-#ifdef __IPHONE_7_0
-@interface UIWindow (SIAlert_StatusBarUtils)
-
-- (UIViewController *)viewControllerForStatusBarStyle;
-- (UIViewController *)viewControllerForStatusBarHidden;
-
-@end
-
-@implementation UIWindow (SIAlert_StatusBarUtils)
-
-- (UIViewController *)viewControllerForStatusBarStyle
-{
-    UIViewController *currentViewController = [self currentViewController];
-    
-    if ([currentViewController childViewControllerForStatusBarStyle]) {
-        return [currentViewController childViewControllerForStatusBarStyle];
-    } else {
-        return currentViewController;
-    }
-}
-
-- (UIViewController *)viewControllerForStatusBarHidden
-{
-    UIViewController *currentViewController = [self currentViewController];
-    
-    if ([currentViewController childViewControllerForStatusBarHidden]) {
-        return [currentViewController childViewControllerForStatusBarHidden];
-    } else {
-        return currentViewController;
-    }
-}
-
-@end
-#endif
-
-
 @interface SIAlertView ()
 
 @property (nonatomic, strong) NSMutableArray *items;
-@property (nonatomic, strong) UIWindow *oldKeyWindow;
+@property (nonatomic, weak) UIWindow *oldKeyWindow;
 @property (nonatomic, strong) UIWindow *alertWindow;
 #ifdef __IPHONE_7_0
 @property (nonatomic, assign) UIViewTintAdjustmentMode oldTintAdjustmentMode;
