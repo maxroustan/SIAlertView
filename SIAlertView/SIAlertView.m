@@ -94,7 +94,7 @@ static SIAlertView *__si_alert_current_view;
 @interface SIAlertView ()
 
 @property (nonatomic, strong) NSMutableArray *items;
-@property (nonatomic, weak) UIWindow *oldKeyWindow;
+@property (nonatomic, strong) UIWindow *oldKeyWindow;
 @property (nonatomic, strong) UIWindow *alertWindow;
 #ifdef __IPHONE_7_0
 @property (nonatomic, assign) UIViewTintAdjustmentMode oldTintAdjustmentMode;
